@@ -1,0 +1,79 @@
+﻿<Window x:Class="PlcTagModifier.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PlcTagModifier" Width="400" SizeToContent="Height">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <!-- Row 0: Connect button and connection parameters -->
+            <RowDefinition Height="Auto"/>
+            <!-- Row 1: Tag Name -->
+            <RowDefinition Height="Auto"/>
+            <!-- Row 2: Tag Type selector -->
+            <RowDefinition Height="Auto"/>
+            <!-- Row 3: Tag Value -->
+            <RowDefinition Height="Auto"/>
+            <!-- Row 4: Read & Write Buttons -->
+            <RowDefinition Height="Auto"/>
+            <!-- Row 5: Connection Status -->
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Connect Button -->
+        <Button Grid.Row="0" Grid.Column="0" Content="Connect" Command="{Binding ConnectCommand}" Margin="5"/>
+
+        <!-- Connection Parameters (PLC IP, Channel, Slot) -->
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- PLC IP Input -->
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="PLC IP:" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding PlcIp, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+                <!-- Channel Input -->
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Channel:" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Channel, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+                <!-- Slot Input -->
+                <TextBlock Grid.Row="0" Grid.Column="3" Text="Slot:" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Slot, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            </Grid>
+        </StackPanel>
+
+        <!-- Tag Name Input -->
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Tag Name:" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TagName, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+        <!-- Tag Type Selector -->
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Tag Type:" VerticalAlignment="Center" Margin="5"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" Margin="5"
+                  ItemsSource="{Binding TagTypes}"
+                  SelectedItem="{Binding TagType, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!-- Tag Value Display/Modify -->
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Tag Value:" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding TagValue, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+        <!-- Read & Write Buttons -->
+        <Button Grid.Row="4" Grid.Column="0" Content="Read" Command="{Binding ReadCommand}" Margin="5"/>
+        <Button Grid.Row="4" Grid.Column="1" Content="Write" Command="{Binding WriteCommand}" Margin="5"/>
+
+        <!-- Connection Status -->
+        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" 
+                   Text="{Binding ConnectionStatus}" 
+                   HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
+    </Grid>
+</Window>
